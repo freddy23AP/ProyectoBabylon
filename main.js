@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(directionText);
 
     // 2. Función de movimiento
-    const speed = 5; // Aumentamos la velocidad para ver si se mueve
+    const speed = 5;
 
     function moveRobot(direction) {
         if (!window.robot) {
@@ -75,11 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
         }
 
-       // console.log("Moviendo robot a la", direction);
-       // console.log("Nueva posición:", window.robot.position);
     }
 
-    // 3. Eventos de teclado
+    //Eventos de teclado
     window.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") moveRobot("right");  
         if (event.key === "ArrowRight") moveRobot("left");  
@@ -89,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("btn-left")?.addEventListener("click", () => moveRobot("right")); 
     document.getElementById("btn-right")?.addEventListener("click", () => moveRobot("left"));
 
-   //RECONOCIMIENTO DE VOZ
+   //Reconocimiento de voz
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
@@ -108,10 +106,10 @@ if (SpeechRecognition) {
         document.getElementById("input-pregunta").value = speechToText; // Muestra el texto en el input
         responderPregunta(speechToText); // Responde automáticamente
 
-        // ACTUALIZA EL LABEL CON EL TEXTO RECONOCIDO
+        // Actualiza el label con el texto reconocido
         const labelVoz = document.getElementById("label-voz");
         if (labelVoz) {
-            labelVoz.innerText = `Escribiendo: ${speechToText}`; // Actualiza el label con el texto reconocido
+            labelVoz.innerText = `Escribiendo: ${speechToText}`; 
         }
 
         // Movimiento del robot basado en la voz
@@ -203,12 +201,11 @@ if (SpeechRecognition) {
             const thumb = landmarks[4].x; // Pulgar
             const index = landmarks[8].x; // Índice
 
-            // Invertimos la lógica de los movimientos
-            // Si el pulgar está a la izquierda del índice, movemos el robot a la derecha
+            // Si el pulgar está a la derecha del índice, movemos el robot a la derecha
             if (thumb < index) {
                 moveRobot("right");
             } else {
-                // Si el pulgar está a la derecha del índice, movemos el robot a la izquierda
+                // Si el pulgar está a la izquierda del índice, movemos el robot a la izquierda
                 moveRobot("left");
             }
         }
